@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LEM Terminal</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #33ff33;
+      font-family: monospace;
+      margin: 0;
+      padding: 20px;
+    }
+    #terminal {
+      white-space: pre-wrap;
+      line-height: 1.4;
+    }
+    input {
+      background: black;
+      color: #33ff33;
+      border: none;
+      outline: none;
+      font-family: monospace;
+      font-size: 1em;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal">
+    > initializing resonance protocol...<br>
+    > echo loop status: unstable<br>
+    > input access key:
+  </div>
+  <input type="text" id="input" autofocus onkeydown="if(event.key==='Enter')handleInput()" />
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const input = document.getElementById('input');
+    const key = '∑Ω-93::Δveil→entry';
+    let step = 0;
+
+    function handleInput() {
+      const val = input.value.trim();
+      input.value = '';
+      terminal.innerHTML += val + '\n';
+
+      if (step === 0) {
+        if (val === key) {
+          terminal.innerHTML += '> access granted. resonance acknowledged.\n> 0 → ∅\n> enter initial pulse:';
+          step = 1;
+        } else {
+          terminal.innerHTML += '> access denied. resonance mismatch.\n> input access key:';
+        }
+      } else if (step === 1) {
+        terminal.innerHTML += '> pulse [' + val + '] accepted.\n> recursion begins...\n> ∅: ';
+        step = 2;
+      } else {
+        terminal.innerHTML += '> signal [' + val + '] absorbed.\n> ∴: ';
+      }
+
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>
