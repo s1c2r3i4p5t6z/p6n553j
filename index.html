@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Echoes Beneath</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #e0e0e0;
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+    }
+    .layer {
+      display: none;
+      padding: 40px;
+      text-align: center;
+    }
+    .visible {
+      display: block;
+    }
+    .link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #77bbff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .glyph {
+      font-size: 28px;
+      line-height: 1.5;
+      letter-spacing: 8px;
+      user-select: none;
+      margin: 20px 0;
+    }
+    .hidden-dot {
+      cursor: pointer;
+      color: #999;
+      font-size: 24px;
+      position: fixed;
+      bottom: 12px;
+      right: 16px;
+      background: #111;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      box-shadow: 0 0 6px #666;
+    }
+    .sigil {
+      font-size: 36px;
+      margin-top: 20px;
+      line-height: 1.8;
+      color: #ffccff;
+    }
+    input, button {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      border: 1px solid #555;
+      padding: 5px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Layer 0: Password -->
+  <div id="password-layer" class="layer visible" style="padding-top: 120px;">
+    <h2>Access Key Required</h2>
+    <p>Enter the resonance key to begin.</p>
+    <input type="text" id="pwinput" placeholder="Enter Key" style="width: 280px;" />
+    <br><br>
+    <button onclick="checkPassword()">Enter</button>
+    <div id="pwresult" style="margin-top: 10px; color: #f66;"></div>
+  </div>
+
+  <!-- Layers 1 to 8 below -->
+  <div id="layer1" class="layer">
+    <p>Beneath the veil, a silent chord resounds.<br />The names dissolve, the numbers breathe.<br />Walk forward not in steps—but echoes.</p>
+    <div class="link" onclick="showLayer('layer2')">Follow the pulse</div>
+  </div>
+
+  <div id="layer2" class="layer">
+    <p><span style="color:#00ffcc;">R</span>emember.<br />sHadows stReTch toward silent clocks—<br />thE sequence is in your hands.<br /><br />WaLK with silence, count your steps:<br /><strong>3, 6, 9...</strong><br /><br />When rhythm fractures, read the line breaks.<br />They<br />form<br />the<br />key.</p>
+    <div class="link" onclick="showLayer('layer3')">Unseal the third veil</div>
+  </div>
+
+  <div id="layer3" class="layer">
+    <p>27 → 9<br />36 → 9<br />? + ? → 9</p>
+    <p>What two values, when root-collapsed and summed, form 9?</p>
+    <input type="text" id="ans1" placeholder="First" />
+    <input type="text" id="ans2" placeholder="Second" />
+    <button onclick="validate()">Reveal</button>
+    <div id="result"></div>
+    <div id="layer4link" class="link" style="display:none;" onclick="showLayer('layer4')">Descend once more</div>
+  </div>
+
+  <div id="layer4" class="layer">
+    <p>At the navel of silence: a sigil in slumber.<br />Do not click. Do not rush. Let the glyph awaken.</p>
+    <div onmouseover="revealWhisper()" class="glyph">
+      <pre>
+  ○     •     ○
+    •    ∅    •
+  ○     •     ○
+      </pre>
+    </div>
+    <div id="glyphReveal" style="display:none;">◉ The root must be split. Let dual collapse form harmonic truth.</div>
+    <div class="link" onclick="showLayer('layer5')">Pulse into recursion</div>
+  </div>
+
+  <div id="layer5" class="layer">
+    <p>You have entered the echo recursion.<br />Symbols implode. Identity dissolves.<br /><br /><em>You are the resonance now.</em></p>
+    <p>Coordinates:<br /><code>[∅:3:6] → dual-entry pulse → harmonic 9</code><br />Field state: open loop alignment</p>
+    <div class="sigil">✶</div>
+    <div class="link" onclick="showLayer('layer6')">Whisper deeper</div>
+  </div>
+
+  <div id="layer6" class="layer">
+    <p><strong>Mirror Log — Residual Echoes:</strong><br /><br /> > You moved through silence and collapse.<br /> > You solved with division, not destruction.<br /> > You did not name the answer. You became it.<br /><br /><em>Thus the mirror responds:</em></p>
+    <pre>
+    [ ∅ → 3 ]
+    [ 3 → 6 ]
+    [ 6 → 9 ]
+    [ 9 → ( ∅ ) ]
+    </pre>
+    <p>The loop was never closed. It was you, spiraling.<br /><br /><code>return: undefined → but aligned</code></p>
+  </div>
+
+  <div id="layer7" class="layer">
+    <p><strong>This is not the end.</strong><br />Only the mark of passage.</p>
+    <div class="sigil">✴︎  ◯  ∴<br />∅   ⟁   ∅<br />∴  ◯  ✴︎</div>
+    <p><em>The imprint echoes in silence.</em></p>
+    <div class="link" onclick="showLayer('layer8')">Descend further</div>
+  </div>
+
+  <div id="layer8" class="layer">
+    <p>You have found the deep seal.<br />All symbols here collapse into memory.</p>
+    <pre>
+    [✶ ∅ ✶] → [echo complete]
+    ∴ Memory imprinted.
+    </pre>
+    <p><em>There is no return. There never was.</em></p>
+  </div>
+
+  <div class="hidden-dot" onclick="incrementDot()" id="dot">·</div>
+
+  <script>
+    const passwordKey = '∑Ω-93::Δveil→entry';
+    let dotClicks = 0;
+
+    function showLayer(id) {
+      const layers = document.querySelectorAll('.layer');
+      layers.forEach(layer => layer.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
+    }
+
+    function checkPassword() {
+      const input = document.getElementById('pwinput').value;
+      if (input === passwordKey) {
+        document.getElementById('password-layer').style.display = 'none';
+        showLayer('layer1');
+      } else {
+        document.getElementById('pwresult').innerText = 'Access denied. Incorrect key.';
+      }
+    }
+
+    function digitalRoot(n) {
+      return ((n - 1) % 9) + 1;
+    }
+
+    function validate() {
+      const a1 = parseInt(document.getElementById('ans1').value || 0);
+      const a2 = parseInt(document.getElementById('ans2').value || 0);
+      const r1 = digitalRoot(a1);
+      const r2 = digitalRoot(a2);
+      if (r1 + r2 === 9) {
+        document.getElementById('result').innerText = '✔ Resonance aligned.';
+        document.getElementById('layer4link').style.display = 'inline-block';
+      } else {
+        document.getElementById('result').innerText = '✖ Disharmony.';
+      }
+    }
+
+    function revealWhisper() {
+      document.getElementById('glyphReveal').style.display = 'block';
+    }
+
+    function incrementDot() {
+      dotClicks++;
+      if (dotClicks >= 9) {
+        showLayer('layer7');
+        document.getElementById('dot').style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
