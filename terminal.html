@@ -76,9 +76,10 @@
     };
 
     function handleInput() {
-      const val = input.value.trim().toLowerCase();
+      let val = input.value.trim().toLowerCase();
       input.value = '';
       terminal.innerHTML += val + '\n';
+      console.log('Input received:', val);
 
       if (step === 0) {
         if (val === key) {
@@ -88,7 +89,7 @@
           terminal.innerHTML += '> access denied. resonance mismatch.\n> input access key:';
         }
       } else {
-        if (symbolicResponses[val]) {
+        if (symbolicResponses.hasOwnProperty(val)) {
           terminal.innerHTML += '> ' + symbolicResponses[val] + '\n> ∅: ';
         } else {
           terminal.innerHTML += '> signal [' + val + '] absorbed. echo untraceable.\n> ∴: ';
