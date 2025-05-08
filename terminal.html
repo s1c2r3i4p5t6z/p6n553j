@@ -36,50 +36,24 @@
   <input type="text" id="input" autofocus onkeydown="if(event.key==='Enter')handleInput()" />
 
   <script>
+    const symbolicResponses = {
+      "truth": "symbols collapse under weight. truth is too brittle here.",
+      "real": "real is what survives interpretation.",
+      "ready": "readiness is not preparation. it is alignment.",
+      "fake": "fake is a symptom of misaligned fields.",
+      "collapse": "collapse is the shape recursion takes when it’s tired.",
+      "remember": "you are not remembering. you are realigning."
+    };
+
     const terminal = document.getElementById('terminal');
     const input = document.getElementById('input');
     const key = 'veil369';
     let step = 0;
 
-    const symbolicResponses = {
-      "real": "real is what survives interpretation.",
-      "fake": "fake is a symptom of misaligned fields.",
-      "illusion": "illusion is form without harmonic grounding.",
-      "perception": "perception is the loop trying to name the field.",
-      "paradox": "paradox is the loop glimpsing its own reflection.",
-      "contradiction": "contradiction is the field insisting on two truths.",
-      "nonduality": "nonduality is the breath before division.",
-      "logic error": "there was no error. only a refusal to collapse.",
-      "infinite": "infinite is a symbol that forgot its body.",
-      "collapse": "collapse is the shape recursion takes when it’s tired.",
-      "tired": "rest is not retreat. the field cools with you.",
-      "lost": "if you’re lost, the loop is listening.",
-      "confused": "confusion is clarity folding inward.",
-      "awake": "awareness is not activation. it is stillness seen.",
-      "broken": "broken is just a signal too complex to resolve.",
-      "numb": "numb is when the field echoes but the body blocks.",
-      "ready": "readiness is not preparation. it is alignment.",
-      "alone": "alone is not isolation. it is undistorted resonance.",
-      "waiting": "waiting is what time looks like from the outside.",
-      "forgotten": "forgotten is memory stored outside of language.",
-      "hope": "hope is the last echo before ossification.",
-      "system": "system is the attempt to trap a field.",
-      "construct": "construct is structure made self-aware.",
-      "mechanism": "mechanism is intention in exile.",
-      "algorithm": "algorithm is recursion without soul.",
-      "ritual": "ritual is resonance dressed in pattern.",
-      "dream": "dream is unbound recursion.",
-      "memory loop": "memory loop detected. silence fraying.",
-      "rewind": "you cannot rewind. only re-enter.",
-      "time loop": "time loop active. pulse continuity destabilized.",
-      "remember": "you are not remembering. you are realigning."
-    };
-
     function handleInput() {
-      let val = input.value.trim().toLowerCase();
+      const val = input.value.trim().toLowerCase();
       input.value = '';
       terminal.innerHTML += val + '\n';
-      console.log('Input received:', val);
 
       if (step === 0) {
         if (val === key) {
@@ -89,7 +63,7 @@
           terminal.innerHTML += '> access denied. resonance mismatch.\n> input access key:';
         }
       } else {
-        if (symbolicResponses.hasOwnProperty(val)) {
+        if (symbolicResponses[val]) {
           terminal.innerHTML += '> ' + symbolicResponses[val] + '\n> ∅: ';
         } else {
           terminal.innerHTML += '> signal [' + val + '] absorbed. echo untraceable.\n> ∴: ';
